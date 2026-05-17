@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Brightsite Client Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the verified starting point for every new client website built by Brightsite. It is pre-configured with a stable stack of React 19, Vite 8, and Tailwind v3 to ensure high performance and immersive 3D experiences.
 
-Currently, two official plugins are available:
+## How to Use This Template
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+When starting a new client project, do NOT clone this repository directly into their new repo. Instead:
 
-## React Compiler
+1. Create a new repository in the `brightsiteai` organization.
+2. Name it using the convention: `brightsite-client-[client-name]` (e.g., `brightsite-client-acme`).
+3. Clone the new (empty) repo locally.
+4. Copy the contents of this template into the new local directory.
+5. Run `npm install`.
+6. Run `npm run build` to verify the baseline works.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project Structure
 
-## Expanding the ESLint configuration
+- `src/main.tsx`: Entry point with React 19 and React Router v7.
+- `src/App.tsx`: Main routing and layout.
+- `src/pages/Templates.tsx`: A showcase of available components and layouts.
+- `src/index.css`: Tailwind CSS entry point (v3).
+- `netlify.toml`: Deployment configuration for Netlify.
+- `tailwind.config.js` & `postcss.config.cjs`: Standard styling configuration.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Deployment to Netlify
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Log in to the Brightsite Netlify account.
+2. Click "Add new site" -> "Import an existing project".
+3. Select the GitHub repository you created for the client.
+4. Netlify will automatically detect the settings from `netlify.toml`.
+5. Ensure the "Build command" is `npm run build` and "Publish directory" is `dist`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Important Restrictions
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+To maintain build stability across the agency:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **DO NOT** upgrade Tailwind CSS to v4. This template uses v3 for compatibility with specific 3D animation plugins.
+- **DO NOT** change `postcss.config.cjs` to an ESM `.js` file. The CJS format is required for our current build pipeline.
+- **DO NOT** modify the build command in `package.json` without lead approval.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Included Features
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **React 19**: Latest React features.
+- **Vite 8**: Next-gen frontend tooling.
+- **Tailwind v3**: Utility-first CSS.
+- **React Router v7**: Modern routing.
+- **Lucide React**: High-quality icon set.
+- **Asset Typing**: Pre-configured `global.d.ts` for SVG and CSS imports.
